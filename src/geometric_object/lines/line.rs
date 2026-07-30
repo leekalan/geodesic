@@ -4,13 +4,24 @@ use crate::geometric_object::{EuclideanGeometry, GeometricObject};
 
 #[derive(Debug, Clone, Copy)]
 pub struct Line<G: EuclideanGeometry> {
-    a: G::Point,
-    b: G::Point,
+    point: G::Point,
+    direction: G::Vector,
 }
 
 impl<G: EuclideanGeometry> Line<G> {
-    pub fn between(a: G::Point, b: G::Point) -> Self {
-        Self { a, b }
+    pub fn through(a: G::Point, b: G::Point) -> Self {
+        Self { point: a.clone(), direction: b - a }
+    }
+
+    pub fn point_direction(point: G::Point, direction: G::Vector) -> Self {
+        Self {
+            point,
+            direction,
+        }
+    }
+
+    pub fn parallel_through(&self, point: G::Point) -> Self {
+        Self::point_direction(point, self.direction.clone())
     }
 }
 
@@ -34,15 +45,13 @@ impl<G: EuclideanGeometry> Sub<G::Vector> for Line<G> {
 
 impl<G: EuclideanGeometry> AddAssign<G::Vector> for Line<G> {
     fn add_assign(&mut self, rhs: G::Vector) {
-        self.a += rhs.clone();
-        self.b += rhs;
+        self.point += rhs;
     }
 }
 
 impl<G: EuclideanGeometry> SubAssign<G::Vector> for Line<G> {
     fn sub_assign(&mut self, rhs: G::Vector) {
-        self.a -= rhs.clone();
-        self.b -= rhs;
+        self.point -= rhs;
     }
 }
 

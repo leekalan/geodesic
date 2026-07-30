@@ -6,11 +6,9 @@ use crate::{
 };
 
 mod geometry;
-mod line;
+pub mod lines;
 
 pub use geometry::{G1, G2, G3, G4, Geometry};
-
-pub use line::Line;
 
 pub trait EuclideanGeometry: Clone {
     type Space: EuclidianSpace<

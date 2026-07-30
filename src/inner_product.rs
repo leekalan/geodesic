@@ -30,7 +30,7 @@ pub trait InnerProductSpace<F: Field> {
         Self::norm_squared(vector).sqrt()
     }
 
-    fn normalize(mut vector: Self::Vector) -> Self::Vector
+    fn normalise(mut vector: Self::Vector) -> Self::Vector
     where
         F: Rootable,
     {

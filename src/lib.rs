@@ -10,7 +10,7 @@ mod tests {
     use super::*;
 
     use affine_space::Point2;
-    use geometric_object::{G2, Line};
+    use geometric_object::{G2, lines::Line};
     use vector_space::Vector2;
 
     #[test]
@@ -23,7 +23,7 @@ mod tests {
         a += vec * 2.;
         b -= vec / 2.;
 
-        let mut line = Line::<G2<_>>::between(a, b);
+        let mut line = Line::<G2<_>>::through(a, b);
 
         line += vec * 2.;
 
