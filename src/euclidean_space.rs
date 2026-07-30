@@ -1,30 +1,27 @@
-use crate::{affine_space::AffineSpace, field::Rootable, inner_product::InnerProductSpace};
+use crate::{
+    affine_space::AffineSpace,
+    field::{Field, Rootable},
+    inner_product::InnerProductSpace,
+    vector_space::VectorSpace,
+};
 
-pub trait EuclidianSpace: AffineSpace<Vector = Self::InnerProductSpace> {
-    type InnerProductSpace: InnerProductSpace<Scalar = Self::Scalar>;
+mod space;
 
-    fn distance_squared(lhs: Self, rhs: Self) -> Self::Scalar {
-        Self::Vector::norm_squared(&(lhs - rhs))
+pub use space::{Space, Space1, Space2, Space3, Space4};
+
+pub trait EuclidianSpace<IP: InnerProductSpace<Self::Scalar, Vector = Self::Vector>> {
+    type Point: AffineSpace<Vector = Self::Vector, Scalar = Self::Scalar>;
+    type Vector: VectorSpace<Scalar = Self::Scalar>;
+    type Scalar: Field;
+
+    fn distance_squared(lhs: Self::Point, rhs: Self::Point) -> Self::Scalar {
+        IP::norm_squared(&(lhs - rhs))
     }
 
-    fn distance(lhs: Self, rhs: Self) -> Self::Scalar
+    fn distance(lhs: Self::Point, rhs: Self::Point) -> Self::Scalar
     where
         Self::Scalar: Rootable,
     {
-        Self::Vector::norm(&(lhs - rhs))
+        IP::norm(&(lhs - rhs))
     }
-}
-
-impl<A: AffineSpace> EuclidianSpace for A
-where
-    A::Vector: InnerProductSpace<Scalar = A::Scalar>,
-{
-    type InnerProductSpace = A::Vector;
-}
-
-fn __compiler_test_1<E: EuclidianSpace>(input: E::Vector) -> E::InnerProductSpace {
-    input
-}
-fn __compiler_test_2<E: EuclidianSpace>(input: E::InnerProductSpace) -> E::Vector {
-    input
 }

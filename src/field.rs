@@ -46,4 +46,8 @@ pub trait Rootable: Field {
     fn sqrt(self) -> Self;
 }
 
-pub trait Summable: Sum {}
+pub trait Absolutable: Field {
+    fn abs(self) -> Self;
+}
+
+pub trait Summable: Field + Sum {}

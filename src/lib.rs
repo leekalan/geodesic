@@ -1,7 +1,7 @@
 pub mod affine_space;
 pub mod euclidean_space;
 pub mod field;
-pub mod geometry;
+pub mod geometric_object;
 pub mod inner_product;
 pub mod vector_space;
 
@@ -10,7 +10,7 @@ mod tests {
     use super::*;
 
     use affine_space::Point2;
-    use geometry::Line;
+    use geometric_object::{G2, Line};
     use vector_space::Vector2;
 
     #[test]
@@ -23,7 +23,7 @@ mod tests {
         a += vec * 2.;
         b -= vec / 2.;
 
-        let mut line = Line::between(a, b);
+        let mut line = Line::<G2<_>>::between(a, b);
 
         line += vec * 2.;
 

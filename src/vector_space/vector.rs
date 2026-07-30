@@ -1,8 +1,7 @@
 use std::array;
 use std::ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Neg, Sub, SubAssign};
 
-use crate::field::{Field, Summable};
-use crate::inner_product::InnerProductSpace;
+use crate::field::Field;
 
 use super::VectorSpace;
 
@@ -18,6 +17,10 @@ impl<const N: usize, F: Field> Vector<N, F> {
 
     pub fn raw(self) -> [F; N] {
         self.data
+    }
+
+    pub fn raw_ref(&self) -> &[F; N] {
+        &self.data
     }
 }
 
@@ -106,16 +109,6 @@ impl<const N: usize, F: Field> VectorSpace for Vector<N, F> {
         Self {
             data: array::from_fn(|_| F::zero()),
         }
-    }
-}
-
-impl<const N: usize, F: Field + Summable> InnerProductSpace for Vector<N, F> {
-    fn inner_product(lhs: &Self, rhs: &Self) -> Self::Scalar {
-        lhs.data
-            .iter()
-            .zip(rhs.data.iter())
-            .map(|(a, b)| a.clone() * b.clone())
-            .sum()
     }
 }
 

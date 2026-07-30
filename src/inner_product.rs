@@ -1,7 +1,11 @@
 use crate::{
-    field::{Field, Rootable},
+    field::{Absolutable, Field, Rootable},
     vector_space::VectorSpace,
 };
+
+mod dot_product;
+
+pub use dot_product::DotProduct;
 
 /// An inner product space is a vector space equipped with an inner product.
 ///
@@ -10,30 +14,39 @@ use crate::{
 /// - `inner_product(a, b) == inner_product(b, a)`
 /// - `inner_product(a, a) > 0` if `a != 0`
 /// - `inner_product(a, a) == 0` if `a == 0`
-pub trait InnerProductSpace: VectorSpace {
-    fn inner_product(lhs: &Self, rhs: &Self) -> Self::Scalar;
+pub trait InnerProductSpace<F: Field> {
+    type Vector: VectorSpace<Scalar = F>;
 
-    fn norm_squared(vector: &Self) -> Self::Scalar {
+    fn inner_product(lhs: &Self::Vector, rhs: &Self::Vector) -> F;
+
+    fn norm_squared(vector: &Self::Vector) -> F {
         Self::inner_product(vector, vector)
     }
 
-    fn norm(vector: &Self) -> Self::Scalar
+    fn norm(vector: &Self::Vector) -> F
     where
-        Self::Scalar: Rootable,
+        F: Rootable,
     {
         Self::norm_squared(vector).sqrt()
     }
 
-    fn normalize(mut vector: Self) -> Self
+    fn normalize(mut vector: Self::Vector) -> Self::Vector
     where
-        Self::Scalar: Rootable,
+        F: Rootable,
     {
         let norm = Self::norm(&vector);
         vector /= norm;
         vector
     }
 
-    fn orthogonal(lhs: &Self, rhs: &Self) -> bool {
-        Self::inner_product(lhs, rhs) == Self::Scalar::zero()
+    fn orthogonal(lhs: &Self::Vector, rhs: &Self::Vector) -> bool {
+        Self::inner_product(lhs, rhs) == F::zero()
+    }
+
+    fn parrallel(lhs: &Self::Vector, rhs: &Self::Vector) -> bool
+    where
+        F: Absolutable,
+    {
+        Self::inner_product(lhs, rhs).abs() == Self::norm_squared(lhs) * Self::norm_squared(rhs)
     }
 }
