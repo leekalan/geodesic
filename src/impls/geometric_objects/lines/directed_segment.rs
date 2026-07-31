@@ -12,10 +12,7 @@ pub struct DirectedSegment<G: EuclideanGeometry> {
 
 impl<G: EuclideanGeometry> DirectedSegment<G> {
     pub fn between(origin: G::Point, end_point: G::Point) -> Self {
-        Self {
-            origin,
-            end_point,
-        }
+        Self { origin, end_point }
     }
 
     pub fn point_direction(origin: G::Point, direction: G::Vector) -> Self {
@@ -32,7 +29,7 @@ impl<G: EuclideanGeometry> DirectedSegment<G> {
     pub fn end_point(self) -> G::Point {
         self.end_point
     }
-    
+
     pub fn direction(self) -> G::Vector {
         self.end_point - self.origin
     }

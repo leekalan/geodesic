@@ -1,10 +1,6 @@
 use std::ops::{Add, AddAssign, Sub, SubAssign};
 
-mod point;
-
 use crate::{field::Field, vector_space::VectorSpace};
-
-pub use point::{Point, Point1, Point2, Point3, Point4};
 
 pub trait AffineSpace:
     Clone

@@ -2,8 +2,7 @@ use std::array;
 use std::ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Neg, Sub, SubAssign};
 
 use crate::field::Field;
-
-use super::VectorSpace;
+use crate::vector_space::VectorSpace;
 
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub struct Vector<const N: usize, F: Field> {

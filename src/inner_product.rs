@@ -3,10 +3,6 @@ use crate::{
     vector_space::VectorSpace,
 };
 
-mod dot_product;
-
-pub use dot_product::DotProduct;
-
 /// An inner product space is a vector space equipped with an inner product.
 ///
 /// # Invariants

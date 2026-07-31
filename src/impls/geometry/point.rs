@@ -1,9 +1,8 @@
 use std::array;
 use std::ops::{Add, AddAssign, Sub, SubAssign};
 
-use crate::affine_space::AffineSpace;
-use crate::field::Field;
-use crate::vector_space::Vector;
+use super::Vector;
+use crate::{affine_space::AffineSpace, field::Field};
 
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub struct Point<const N: usize, F: Field> {

@@ -3,8 +3,6 @@ use std::{
     ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Neg, Sub, SubAssign},
 };
 
-mod float;
-
 use crate::vector_space::VectorSpace;
 
 pub trait Field:

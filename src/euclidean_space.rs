@@ -5,10 +5,6 @@ use crate::{
     vector_space::VectorSpace,
 };
 
-mod space;
-
-pub use space::{Space, Space1, Space2, Space3, Space4};
-
 pub trait EuclidianSpace<IP: InnerProductSpace<Self::Scalar, Vector = Self::Vector>> {
     type Point: AffineSpace<Vector = Self::Vector, Scalar = Self::Scalar>;
     type Vector: VectorSpace<Scalar = Self::Scalar>;

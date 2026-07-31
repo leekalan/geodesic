@@ -1,11 +1,17 @@
 use crate::{
-    affine_space::Point,
-    euclidean_space::Space,
     field::{Field, Summable},
     geometric_object::EuclideanGeometry,
-    inner_product::DotProduct,
-    vector_space::Vector,
 };
+
+mod dot_product;
+mod point;
+mod space;
+mod vector;
+
+pub use dot_product::DotProduct;
+pub use point::{Point, Point1, Point2, Point3, Point4};
+pub use space::{Space, Space1, Space2, Space3, Space4};
+pub use vector::{Vector, Vector1, Vector2, Vector3, Vector4};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct Geometry<const N: usize, F: Field> {

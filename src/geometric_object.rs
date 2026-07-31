@@ -5,11 +5,6 @@ use crate::{
     inner_product::InnerProductSpace, vector_space::VectorSpace,
 };
 
-mod geometry;
-pub mod lines;
-
-pub use geometry::{G1, G2, G3, G4, Geometry};
-
 pub trait EuclideanGeometry: Clone {
     type Space: EuclidianSpace<
             Self::InnerProduct,

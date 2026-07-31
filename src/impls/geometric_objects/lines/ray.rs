@@ -17,18 +17,15 @@ impl<G: EuclideanGeometry> Ray<G> {
             origin,
         }
     }
-    
+
     pub fn point_direction(origin: G::Point, direction: G::Vector) -> Self {
-        Self {
-            origin,
-            direction,
-        }
+        Self { origin, direction }
     }
 
     pub fn origin(self) -> G::Point {
         self.origin
     }
-    
+
     pub fn direction(self) -> G::Vector {
         self.direction
     }

@@ -1,9 +1,8 @@
+use super::Vector;
 use crate::{
     field::{Field, Summable},
-    vector_space::Vector,
+    inner_product::InnerProductSpace,
 };
-
-use super::InnerProductSpace;
 
 pub struct DotProduct<const N: usize> {}
 

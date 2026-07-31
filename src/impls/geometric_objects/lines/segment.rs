@@ -21,7 +21,7 @@ impl<G: EuclideanGeometry> Segment<G> {
             b: point + direction,
         }
     }
-    
+
     /// The endpoints have no intrinsic ordering.
     pub fn end_points(self) -> (G::Point, G::Point) {
         (self.a, self.b)

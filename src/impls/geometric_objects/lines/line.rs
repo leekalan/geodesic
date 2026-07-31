@@ -10,14 +10,14 @@ pub struct Line<G: EuclideanGeometry> {
 
 impl<G: EuclideanGeometry> Line<G> {
     pub fn through(a: G::Point, b: G::Point) -> Self {
-        Self { point: a.clone(), direction: b - a }
+        Self {
+            point: a.clone(),
+            direction: b - a,
+        }
     }
 
     pub fn point_direction(point: G::Point, direction: G::Vector) -> Self {
-        Self {
-            point,
-            direction,
-        }
+        Self { point, direction }
     }
 
     pub fn parallel_through(&self, point: G::Point) -> Self {

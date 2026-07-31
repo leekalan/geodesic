@@ -1,8 +1,5 @@
-use crate::{
-    affine_space::Point, field::Field, inner_product::InnerProductSpace, vector_space::Vector,
-};
-
-use super::EuclidianSpace;
+use super::{Point, Vector};
+use crate::{euclidean_space::EuclidianSpace, field::Field, inner_product::InnerProductSpace};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct Space<const N: usize, F: Field> {
